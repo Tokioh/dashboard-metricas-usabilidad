@@ -1,0 +1,8 @@
+DESARROLLO WEB  (grupo 2 estudiantes)
+
+1) Formular métricas cuantitativas y métricas cualitativas
+con sus parámetros en base a tareas especificas (generales)
+Lista, tablas, entrada datos, botones, etc.
+2) Una vista de tabla de resultados (aceptable, no aceptable) con gráfica 
+3) Descarga de los resultados en pdf
+
