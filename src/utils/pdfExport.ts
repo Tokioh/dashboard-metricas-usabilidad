@@ -22,54 +22,65 @@ export async function exportDashboardToPDF(
 
   // Header Bar (Dark Navy/Black with Neon Lime accent)
   doc.setFillColor(12, 14, 18);
-  doc.rect(0, 0, pageWidth, 38, 'F');
+  doc.rect(0, 0, pageWidth, 44, 'F');
   
   // Neon green accent line
   doc.setFillColor(204, 255, 0);
-  doc.rect(0, 37, pageWidth, 1.5, 'F');
+  doc.rect(0, 43, pageWidth, 1.5, 'F');
 
   // Title
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(204, 255, 0);
-  doc.setFontSize(14);
-  doc.text('REPORTE DE MÉTRICAS DE USABILIDAD Y ACCESIBILIDAD', margin, 12);
+  doc.setFontSize(13.5);
+  doc.text('REPORTE DE MÉTRICAS DE USABILIDAD Y ACCESIBILIDAD', margin, 11);
 
-  // Student & Academic Info
+  // Student & Academic Info (Row 1)
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.setFontSize(8.5);
-  doc.text('Estudiante: ', margin, 19);
+  doc.setFontSize(8);
+  doc.text('Estudiante:', margin, 18);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(220, 230, 245);
-  doc.text('Alonso Bailon Kevin Joel', margin + 18, 19);
-
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(255, 255, 255);
-  doc.text('Curso: ', margin + 95, 19);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(220, 230, 245);
-  doc.text('6to "A"', margin + 107, 19);
+  doc.text('Alonso Bailon Kevin Joel', margin + 17, 18);
 
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.text('Materia: ', margin, 26);
+  doc.text('Curso:', margin + 95, 18);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(220, 230, 245);
-  doc.text('Usabilidad y Accesibilidad', margin + 14, 26);
+  doc.text('6to "A"', margin + 107, 18);
+
+  // Student & Academic Info (Row 2)
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(255, 255, 255);
+  doc.text('Materia:', margin, 25);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(220, 230, 245);
+  doc.text('Usabilidad y Accesibilidad', margin + 14, 25);
 
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.text('Fecha: ', margin + 95, 26);
+  doc.text('Fecha:', margin + 95, 25);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(220, 230, 245);
-  doc.text(new Date().toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' }), margin + 107, 26);
+  doc.text(new Date().toLocaleDateString('es-EC', { year: 'numeric', month: 'long', day: 'numeric' }), margin + 107, 25);
 
+  // GitHub Repository Link Banner (Row 3 - Destacado)
+  const repoUrl = 'https://github.com/Tokioh/dashboard-metricas-usabilidad';
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(204, 255, 0);
+  doc.text('Repositorio GitHub:', margin, 32);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(140, 210, 255);
+  doc.textWithLink(repoUrl, margin + 30, 32, { url: repoUrl });
+
+  // Standards (Row 4)
   doc.setFont('helvetica', 'italic');
-  doc.setTextColor(170, 180, 195);
-  doc.setFontSize(7.5);
-  doc.text('Normas aplicadas: ISO 9241-11, SUS (Brooke, 1996), NASA-TLX, Escala Likert, Net Promoter Score (NPS)', margin, 33);
+  doc.setTextColor(160, 170, 185);
+  doc.setFontSize(7);
+  doc.text('Normas aplicadas: ISO 9241-11, Cuestionario SUS (Brooke, 1996), NASA-TLX, Escala Likert, NPS', margin, 39);
 
-  let currentY = 46;
+  let currentY = 51;
 
   // Resumen Ejecutivo Cards
   doc.setFillColor(245, 247, 250);
@@ -275,12 +286,19 @@ export async function exportDashboardToPDF(
   currentY += 10;
   if (currentY + 25 < pageHeight) {
     doc.setFillColor(240, 244, 248);
-    doc.roundedRect(margin, currentY, contentWidth, 18, 2, 2, 'F');
-    doc.setFontSize(7.5);
+    doc.roundedRect(margin, currentY, contentWidth, 22, 2, 2, 'F');
+    doc.setFontSize(7);
     doc.setTextColor(70, 80, 95);
     doc.setFont('helvetica', 'italic');
     doc.text('Nota metodológica: Las métricas cuantitativas evalúan eficacia y eficiencia según Tullis & Albert (2013).', margin + 5, currentY + 6);
-    doc.text('Las métricas cualitativas evalúan satisfacción y carga cognitiva mediante escalas validadas (SUS, Likert, NASA-TLX, NPS).', margin + 5, currentY + 12);
+    doc.text('Las métricas cualitativas evalúan satisfacción y carga cognitiva mediante escalas validadas (SUS, Likert, NASA-TLX, NPS).', margin + 5, currentY + 11);
+    
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(30, 41, 59);
+    doc.text('Código fuente y dashboard interactivo:', margin + 5, currentY + 17);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(2, 132, 199);
+    doc.textWithLink('https://github.com/Tokioh/dashboard-metricas-usabilidad', margin + 55, currentY + 17, { url: 'https://github.com/Tokioh/dashboard-metricas-usabilidad' });
   }
 
   // Save the PDF
